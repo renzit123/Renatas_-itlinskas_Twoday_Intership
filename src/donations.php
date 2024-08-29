@@ -42,4 +42,10 @@ class Donations
         return $this->date;
     }
 
+    public function addDonation()
+    {
+        $this->donor_name = readline("Enter donor name: ");
+        $this->amount = readline("Enter donation amount: ");
+        $this->date = readline("Enter donation date: ");
+    }
 }
