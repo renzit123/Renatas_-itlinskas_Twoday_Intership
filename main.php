@@ -34,9 +34,10 @@ while (true) {
                 foreach ($charity as $charities) {
                     if ($charities->getId() == $id) {
                         $charities->updateCharity();
+                        echo "Charity updated successfully\n";
+                        break;
                     }
                 }
-
             }
             break;
         case 'delete':
@@ -47,6 +48,9 @@ while (true) {
                 foreach ($charity as $key => $charities) {
                     if ($charities->getId() == $id) {
                         unset($charity[$key]);
+echo "Charity deleted successfully\n";
+
+                        break;
                     }
                 }
             }
@@ -55,6 +59,7 @@ while (true) {
             $id = count($charity) + 1;
             $charity[] = new Charities($id, null, null);
             end($charity)->addCharity();
+            echo "Charity added successfully\n";
             break;
         case 'addDonation':
             $id = count($donation) + 1;
@@ -68,6 +73,7 @@ while (true) {
             if ($charityExist) {
                 $donation[] = new Donations($id, null, null, $charityId, null);
                 end($donation)->addDonation();
+                echo "Donation added successfully\n";
             } else {
                 echo "Charity does not exist\n";
             }

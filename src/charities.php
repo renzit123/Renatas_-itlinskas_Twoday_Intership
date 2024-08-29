@@ -27,12 +27,28 @@ class Charities
     {
         $this->charity_name = readline("Enter new charity name: ");
         $this->rep_email = readline("Enter new charity representative email: ");
+if ($this->charity_name == "" || $this->rep_email == "") {
+    echo "Please enter valid input\n";
+    $this->updateCharity();
+}
+if (!filter_var($this->rep_email, FILTER_VALIDATE_EMAIL)) {
+    echo "Please enter a valid email\n";
+    $this->updateCharity();
+}
     }
 
     public function addCharity()
     {
         $this->charity_name = readline("Enter charity name: ");
         $this->rep_email = readline("Enter charity representative email: ");
+if ($this->charity_name == "" || $this->rep_email == "") {
+    echo "Please enter valid input\n";
+    $this->addCharity();
+}
 
+if (!filter_var($this->rep_email, FILTER_VALIDATE_EMAIL)) {
+    echo "Please enter a valid email\n";
+    $this->addCharity();
+}
     }
 }

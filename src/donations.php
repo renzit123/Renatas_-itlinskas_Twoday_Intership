@@ -46,6 +46,20 @@ class Donations
     {
         $this->donor_name = readline("Enter donor name: ");
         $this->amount = readline("Enter donation amount: ");
-        $this->date = readline("Enter donation date: ");
+        $this->date = readline("Enter donation date(format is yyyy-mm-dd: ");
+        if ($this->donor_name == "" || $this->amount == "" || $this->date == "") {
+            echo "Please enter valid input\n";
+            $this->addDonation();
+        }
+
+        if (!is_numeric($this->amount)) {
+            echo "Please enter a valid amount\n";
+            $this->addDonation();
+        }
+        if (!preg_match("/\d{4}-\d{2}-\d{2}/", $this->date)) {
+            echo "Please enter a valid date\n";
+            $this->addDonation();
+        }
+
     }
 }
