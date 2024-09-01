@@ -1,8 +1,11 @@
 <?php
 require_once 'src/charities.php';
 require_once 'src/donations.php';
+require_once 'src/import.php';
+
 $charity = [];
 $donation = [];
+$importer = new Import();
 
 while (true) {
     echo "1. To view charities type 'view' \n";
@@ -10,7 +13,9 @@ while (true) {
     echo "3. To delete charities type 'delete' \n";
     echo "4. To add charities type 'addCharity' \n";
     echo "5. To add donation type 'addDonation' \n";
-    echo "6. To exit type 'exit' \n";
+    echo "6. To import charities from CSV type 'importCSV' \n";
+    echo "7. To exit type 'exit' \n";
+
     $input = readline("Enter your choice: ");
 
     switch ($input) {
@@ -19,9 +24,12 @@ while (true) {
                 echo "No charities available\n";
             } else {
                 foreach ($charity as $charities) {
-                    echo "Charity ID: " . $charities->getId() . "\n";
-                    echo "Charity Name: " . $charities->getCharityName() . "\n";
-                    echo "Charity Representative Email: " . $charities->getRepEmail() . "\n";
+                    echo "--------------------------------\n";
+                    echo "| ID: " . $charities->getId() . "\n";
+                    echo "| Name: " . $charities->getCharityName() . "\n";
+                    echo "| Email: " . $charities->getRepEmail() . "\n";
+                    echo "--------------------------------\n";
+
                 }
             }
             break;
@@ -48,7 +56,7 @@ while (true) {
                 foreach ($charity as $key => $charities) {
                     if ($charities->getId() == $id) {
                         unset($charity[$key]);
-echo "Charity deleted successfully\n";
+                        echo "Charity deleted successfully\n";
 
                         break;
                     }
@@ -80,6 +88,10 @@ echo "Charity deleted successfully\n";
             break;
         case 'exit':
             exit();
+            break;
+        case 'importCSV':
+            $filename = readline("Enter the CSV file path: ");
+            $importer->importCharitiesFromCSV($filename, $charity);
             break;
         default:
             echo "Invalid choice\n";
